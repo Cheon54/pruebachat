@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between pb-4">
+  <p>{{ usuario }}</p><li class="btn btn-secondary col-3" *ngIf="authenticated" ><a (click)="logout()">Logout</a></li>
+</div>
+<div class="containerlist mb-4">
+  <div class="list" #scroller> 
+    <ul class="list-group mt-4" >
+      <li class="list-group-item list-group-item-action" 
+      *ngFor="let todo of todoListArray">
+        <div class="d-flex justify-content-between align-item-center font-weight-bold">
+            <p>{{todo.title}}</p>
+          <span *ngIf="todo.usuario == usuario " class="cursor-hover text-danger "
+          (click)="deleteTodo(todo.$key)">
+            <i class="far fa-trash-alt"></i>
+          </span>
+        </div>
+        <div class="d-flex justify-content-between font-weight-light">
+          <p>{{todo.usuario}}</p>
+          <p *ngIf="true" class="">{{todo.date | date:'medium'}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="input-group">
+  <input type="text" class="form-control"
+  placeholder="Enviar mensaje..."
+  #itemTitle
+  (keyup.enter)="addTodo(itemTitle)"
+  >
+  <div class="input-group-append">
+    <button class="btn btn-outline-success"
+    (click)="addTodo(itemTitle)">
+      <i class="fas fa-plus-circle"></i>
+    </button>
+  </div>
+</div>
